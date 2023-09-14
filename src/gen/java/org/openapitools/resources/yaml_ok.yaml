@@ -1,0 +1,138 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: Todo List
+servers:
+  - url: 'http://localhost:8080/todolist'
+
+paths:
+  /todos/{id}:
+    get:
+      summary: Get a todo
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: get todos response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+  /todos:
+    put:
+      summary: Create a todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: creation response
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /tasks/{todoId}:
+    get:
+      summary: Get a list of tasks
+      parameters:
+        - name: todoId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: get tasks response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+  /tasks:
+    put:
+      summary: Create a new task for a specific todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - todoId
+                - description
+              properties:
+                todoId:
+                  type: integer
+                  format: int64
+                description:
+                  type: string
+      responses:
+        '200':
+          description: creation response
+          content:
+            application/json:
+              schema:
+                type: boolean
+
+components:
+  requestBodies:
+    TaskRequest:
+      description: new task
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - todoId
+              - description
+            properties:
+              todoId:
+                type: string
+              description:
+                type: string
+  schemas:
+    Todo:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        creation:
+          type: string
+        numberOfTasks:
+          type: integer
+          format: int64
+    Task:
+      type: object
+      required:
+        - todoId
+        - description
+      properties:
+        taskId:
+          type: integer
+          format: int64
+        todoId:
+          type: integer
+          format: int64
+        description:
+          type: string
+        creation:
+          type: string
+        isDone:
+          type: boolean

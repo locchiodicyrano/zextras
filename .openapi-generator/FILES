@@ -1,0 +1,12 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/gen/java/org/openapitools/api/RestApplication.java
+src/gen/java/org/openapitools/api/RestResourceRoot.java
+src/gen/java/org/openapitools/api/TasksApi.java
+src/gen/java/org/openapitools/api/TodosApi.java
+src/gen/java/org/openapitools/model/Task.java
+src/gen/java/org/openapitools/model/TasksPutRequest.java
+src/gen/java/org/openapitools/model/Todo.java
+src/gen/java/org/openapitools/model/TodosPutRequest.java
+src/main/openapi/openapi.yaml
